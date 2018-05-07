@@ -1,16 +1,28 @@
 <template>
-  <div class="search-bar">
-    <van-row gutter="5">
-      <van-col span="3">
-        <img :src="locationIcon" width="80%" class="location-icon" />
-      </van-col>
-      <van-col span="16">
-        <input type="text" class="search-input" />
-      </van-col>
-      <van-col span="5">
-        <van-button size="mini">查找</van-button>
-      </van-col>
-    </van-row>
+  <div class="page-home">
+    <!-- 筛选 -->
+    <div class="search-bar">
+      <van-row gutter="5">
+        <van-col span="3" style="height: 2.2rem">
+          <img :src="locationIcon" width="80%" class="location-icon" />
+        </van-col>
+        <van-col span="16">
+          <input type="text" class="search-input" />
+        </van-col>
+        <van-col span="5">
+          <van-button size="mini">查找</van-button>
+        </van-col>
+      </van-row>
+    </div>
+
+    <!-- 轮播图 -->
+    <div class="swiper-area">
+      <van-swipe :autoplay="100000">
+        <van-swipe-item v-for="(banner, index) in bannerPicArray" :key="index">
+          <img v-lazy="banner.imageUrl" width="100%"/>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
   </div>
 </template>
 
@@ -21,7 +33,12 @@ export default {
   },
   data () {
     return {
-      locationIcon: require('../../assets/images/logo.png')
+      locationIcon: require('../../assets/images/logo.png'),
+      bannerPicArray: [
+        {imageUrl: 'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'},
+        {imageUrl: 'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'},
+        {imageUrl: 'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'}
+      ]
     }
   },
   computed: {
@@ -30,8 +47,14 @@ export default {
     ])
   },
   created () {
+    this.loadList()
   },
   methods: {
+    loadList () {
+      this.$http.get('https://easy-mock.com/mock/5af01dd24a095174a7d86d1e/api/index').then(res => {
+        console.log(res)
+      }).catch(res => {})
+    }
   }
 }
 </script>
@@ -49,12 +72,17 @@ export default {
     border-top:0px;
     border-left:0px;
     border-right:0px;
-    border-bottom: 1px solid 1px !important ;
+    border-bottom: 1px solid !important ;
     background-color: #e5017d;
     color:#fff;
   }
   .location-icon{
     padding-top: .2rem;
     padding-left: .3rem;
+  }
+  .swiper-area{
+    max-height: 10rem;
+    clear: both;
+    overflow: hidden;
   }
 </style>
