@@ -1,6 +1,6 @@
 <template>
   <div class="page-home">
-    <!-- 筛选 -->
+    <!-- 顶部筛选 -->
     <div class="search-bar">
       <van-row gutter="5">
         <van-col span="3" style="height: 2.2rem">
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     loadList () {
-      this.$http.get('https://easy-mock.com/mock/5af01dd24a095174a7d86d1e/api/index').then(res => {
+      this.$http.get('/api/index').then(res => {
         console.log(res)
       }).catch(res => {})
     }
