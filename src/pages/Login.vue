@@ -47,11 +47,16 @@ export default {
     ]),
     login () {
       // let url = this.apiUrl + '/admin/login'
-      let data = {
-        account: this.user.username,
-        password: this.user.password
+      // let data = {
+      //   account: this.user.username,
+      //   password: this.user.password
+      // }
+      let user = {
+        id: 1,
+        user: 'Shruan',
+        token: 'jhkhukjhk23h12k3hk21huu12y321312'
       }
-      this._user(data)
+      this._user(user)
       // this.$http.post(url, data).then(res => {
       //   res = res.data
       //   if (res.status == '1000') {
@@ -68,7 +73,6 @@ export default {
       //   this.$message.error('网络错误，请稍后再试')
       // })
       this.$router.push({path: '/home/index'})
-      this.$message.success('欢迎登陆')
     }
   }
 }
