@@ -13,7 +13,7 @@ Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload)
 Vue.config.productionTip = false
 
 let http = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '' : 'https://easy-mock.com/mock/5af01dd24a095174a7d86d1e',
+  baseURL: process.env.NODE_ENV === 'development' ? '/' : 'https://easy-mock.com/mock/5af01dd24a095174a7d86d1e',
   timeout: 1000
 })
 // 请求过滤器
