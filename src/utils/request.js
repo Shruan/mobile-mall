@@ -29,15 +29,19 @@ http.interceptors.response.use(res => {
       }
   }
 }, err => {
-  switch (err.response.status) {
-    case 404:
-      console.log('404 error')
-      break
-    case 500:
-      console.log('500 err')
-      break
-    default:
-      console.log('unknow err')
+  if (err.response) {
+    switch (err.response.status) {
+      case 404:
+        console.log('404 error')
+        break
+      case 500:
+        console.log('500 err')
+        break
+      default:
+        console.log('unknow err')
+    }
+  } else {
+    console.log(err)
   }
   return Promise.reject(err)
 })

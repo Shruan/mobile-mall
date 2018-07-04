@@ -19,6 +19,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import url from '@/utils/serviceApi.config.js'
 
 export default {
   name: 'Login',
@@ -46,16 +47,19 @@ export default {
       '_user'
     ]),
     login () {
-      // let url = this.apiUrl + '/admin/login'
-      // let data = {
-      //   account: this.user.username,
-      //   password: this.user.password
-      // }
       let user = {
         id: 1,
         user: 'Shruan',
         token: 'jhkhukjhk23h12k3hk21huu12y321312'
       }
+      this.$http.post(url.login, this.user).then(res => {
+        console.log(res)
+        if (res.success) {
+          this.$router.push({path: '/home'})
+        } else {
+          console.log(res.message)
+        }
+      })
       this._user(user)
       // this.$http.post(url, data).then(res => {
       //   res = res.data
@@ -72,7 +76,6 @@ export default {
       // }).catch(() => {
       //   this.$message.error('网络错误，请稍后再试')
       // })
-      this.$router.push({path: '/home/index'})
     }
   }
 }
@@ -83,7 +86,7 @@ export default {
   .login {
     width: 100%;
     height: 100%;
-    background: #202d3e;
+    background: #fff;
     position: relative;
   }
   .login .login-box {
@@ -91,7 +94,7 @@ export default {
     height: 240px;
     padding: 20px;
     border-radius: 6px;
-    background: #334257;
+    background: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .8);
     margin: auto;
     left: 0;

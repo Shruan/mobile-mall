@@ -42,7 +42,7 @@ export default {
   /* 布局 */
   .shy__box {
     background: #f9f9f9;
-    height: 100%;
+    min-height: 100%;
   }
   .shy__layout-right {
     box-sizing: border-box;
