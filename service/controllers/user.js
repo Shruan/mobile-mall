@@ -53,11 +53,7 @@ const login = async (ctx, next) => {
       result = { data: '', success: true, message: '登录成功' }
     }
   }).catch(res => {
-    if (res.code === 100) {
-      result = { data: '', success: false, message: '账号未注册' }
-    } else if (res.code === 300) {
-      result = { data: '', success: false, message: '密码错误' }
-    }
+    result = { data: '', success: false, message: res.message }
   })
   ctx.body = result
 }

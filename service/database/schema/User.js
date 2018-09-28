@@ -38,16 +38,17 @@ userSchema.pre('save', function (next) {
   })
 })
 
+// 解密
 userSchema.methods.compare = function (User, username, password) {
   return new Promise((resolve, reject) => {
     resolve(User.findOne({userName: username}).exec())
   }).then(res => {
     return new Promise((resolve, reject) => {
-      if (!res) reject({ code: 100 })  // 账号不存在
+      if (!res) reject({ code: 400, message: '账号不存在' })  // 账号不存在
       bcrypt.compare(password, res.password, (err, res) => {
         if (err) throw err
         if (res) resolve({ code: 200 }) // 登录成功
-        if (!res) reject({ code: 300 })  // 密码错误
+        if (!res) reject({ code: 400, message: '密码错误' })  // 密码错误
       })
     })
   })
