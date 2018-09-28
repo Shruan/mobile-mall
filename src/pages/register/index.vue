@@ -69,7 +69,6 @@ export default {
     // 表单验证
     checkForm () {
       return new Promise((resolve, reject) => {
-        let errorMsg = ''
         if (this.form.username.length < 5) resolve({ success: false, message: '用户名不能小于5位' })
         if (this.form.password.length < 6) resolve({ success: false, message: '密码不能少于6位' })
         resolve({ success: true })
