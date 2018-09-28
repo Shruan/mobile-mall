@@ -7,7 +7,7 @@
       @click-left="goBack"
     />
       <div class="register-panel">
-        
+
       <van-field
         required
         v-model="form.username"
@@ -66,23 +66,36 @@ export default {
     goBack () {
       this.$router.go(-1)
     },
+    // 表单验证
+    checkForm () {
+      return new Promise((resolve, reject) => {
+        let errorMsg = ''
+        if (this.form.username.length < 5) resolve({ success: false, message: '用户名不能小于5位' })
+        if (this.form.password.length < 6) resolve({ success: false, message: '密码不能少于6位' })
+        resolve({ success: true })
+      })
+    },
+    // 注册操作
     register () {
-      if (!this.form.username || !this.form.password) {
-        Toast.fail('账号密码不能为空')
-        return
-      }
-      this.openLoading = true
-      this.$http.post(url.registerUser, this.form).then(res => {
-        if (res.code == 200) {
-          Toast.success('注册成功')
-          this.$router.push({name: 'Login'})
+      this.checkForm().then(res => {
+        if (res.success) {
+          this.openLoading = true
+          this.$http.post(url.registerUser, this.form).then(res => {
+            if (res.code == 200) {
+              Toast.success('注册成功')
+              this.$router.push({ name: 'Login' })
+            } else {
+              Toast.fail('注册失败')
+              this.openLoading = false
+            }
+          }).catch(err => {
+            console.log(err)
+            Toast.fail('注册失败')
+            this.openLoading = false
+          })
         } else {
-          Toast.fail('注册失败')
-          this.openLoading = false
+          Toast.fail(res.message)
         }
-      }).catch(err => {
-        Toast.fail('注册失败')
-        this.openLoading = false
       })
     }
   }
