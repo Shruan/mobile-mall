@@ -49,11 +49,13 @@ const login = async (ctx, next) => {
   // 密码校验
   let user = new User()
   await user.compare(User, res.username, res.password).then(res => {
-    if (res.code === 200) {
+    if (res.success) {
       result = { data: '', success: true, message: '登录成功' }
+    } else {
+      result = { data: '', success: false, message: res.message }
     }
-  }).catch(res => {
-    result = { data: '', success: false, message: res.message }
+  }).catch(err => {
+    result = { data: '', success: false, message: err }
   })
   ctx.body = result
 }

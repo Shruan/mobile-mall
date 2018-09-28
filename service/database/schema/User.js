@@ -44,11 +44,14 @@ userSchema.methods.compare = function (User, username, password) {
     resolve(User.findOne({userName: username}).exec())
   }).then(res => {
     return new Promise((resolve, reject) => {
-      if (!res) reject({ code: 400, message: '账号不存在' })  // 账号不存在
+      if (!res) resolve({ success: false, message: '账号不存在' })  // 账号不存在
       bcrypt.compare(password, res.password, (err, res) => {
-        if (err) throw err
-        if (res) resolve({ code: 200 }) // 登录成功
-        if (!res) reject({ code: 400, message: '密码错误' })  // 密码错误
+        if (err) {
+          reject(err)
+          throw err
+        }
+        if (res) resolve({ success: true, result: res }) // 登录成功
+        if (!res) resolve({ success: false, message: '密码错误' })  // 密码错误
       })
     })
   })
