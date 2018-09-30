@@ -54,15 +54,7 @@ export default new Router({
             title: '商品类别'
           }
         },
-        {
-          path: '/Goods',
-          component: Goods,
-          name: 'Goods',
-          props: (route) => ({ goodsId: route.query.goodsId }),
-          meta: {
-            title: '商品详情'
-          }
-        },
+
         {
           path: '/Cart',
           component: Cart,
@@ -80,6 +72,15 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: '/Goods',
+      component: Goods,
+      name: 'Goods',
+      props: (route) => ({ goodsId: route.query.goodsId }),
+      meta: {
+        title: '商品详情'
+      }
     }
   ]
 })
