@@ -26,6 +26,14 @@ export default new Router({
       component: Login
     },
     {
+      path: '/register',
+      component: Register,
+      name: 'Register',
+      meta: {
+        title: '注册页面'
+      }
+    },
+    {
       path: '/index',
       name: 'Index',
       component: Layout,
@@ -39,14 +47,6 @@ export default new Router({
           }
         },
         {
-          path: '/register',
-          component: Register,
-          name: 'Register',
-          meta: {
-            title: '注册页面'
-          }
-        },
-        {
           path: '/CategoryList',
           component: CategoryList,
           name: 'CategoryList',
@@ -54,7 +54,6 @@ export default new Router({
             title: '商品类别'
           }
         },
-
         {
           path: '/Cart',
           component: Cart,
