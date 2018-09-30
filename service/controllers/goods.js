@@ -24,7 +24,7 @@ const getCategoryList = async (ctx) => {
   try {
     let goodsId = ctx.request.query.goodsId
     const Category = mongoose.model('Category')
-    let result = await Category.findOne().exec()
+    let result = await Category.find().exec()
     ctx.body = {
       success: true,
       data: result
@@ -43,7 +43,7 @@ const getCategorySubList = async (ctx) => {
   try {
     let categoryId = ctx.request.query.categoryId
     const CategorySub = mongoose.model('CategorySub')
-    let result = await CategorySub.findOne({ MALL_CATEGORY_ID: categoryId }).exec()
+    let result = await CategorySub.find({ MALL_CATEGORY_ID: categoryId }).exec()
     ctx.body = {
       success: true,
       data: result
@@ -77,8 +77,8 @@ const getGoodsListByCategorySubID = async (ctx) => {
 }
 
 module.exports = {
-  'GET /getDetailGoodsInfo': getDetailGoodsInfo,
-  'GET /getCategoryList': getCategoryList,
-  'GET /getCategorySubList': getCategorySubList,
-  'GET /getGoodsListByCategorySubID': getGoodsListByCategorySubID
+  'GET /goods/getDetailGoodsInfo': getDetailGoodsInfo,
+  'GET /goods/getCategoryList': getCategoryList,
+  'GET /goods/getCategorySubList': getCategorySubList,
+  'GET /goods/getGoodsListByCategorySubID': getGoodsListByCategorySubID
 }
