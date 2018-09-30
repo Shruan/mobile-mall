@@ -61,8 +61,13 @@ const getCategorySubList = async (ctx) => {
 const getGoodsListByCategorySubID = async (ctx) => {
   try {
     let categorySubId = ctx.request.query.categorySubId
+    let page = ctx.request.query.page
+    let num = 10
+    let start = (page - 1) * num
     const Goods = mongoose.model('Goods')
-    let result = await Goods.find({ SUB_ID: categorySubId })
+    // skip 跳过数量
+    // limit 获取数据数量
+    let result = await Goods.find({ SUB_ID: categorySubId }).skip(start).limit(num).exec()
     ctx.body = {
       success: true,
       data: result
