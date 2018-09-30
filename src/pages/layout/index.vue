@@ -1,6 +1,16 @@
 <template>
   <div class="shy__box">
-    <router-view></router-view>
+    <div class="main-div">
+      <keep-alive>
+          <router-view />
+      </keep-alive>
+    </div>
+    <van-tabbar v-model="active" @change="changeTabbar(active)">
+        <van-tabbar-item icon="shop">首页</van-tabbar-item>
+        <van-tabbar-item icon="records">列表</van-tabbar-item>
+        <van-tabbar-item icon="cart">购物车</van-tabbar-item>
+        <van-tabbar-item icon="contact">会员中心</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
@@ -14,6 +24,8 @@ export default {
     return {
       user: {},
       pageStyle: '',
+      active: 0,
+      nowPath:'',  //当前路径
       transitionName: 'slide-left'
     }
   },
@@ -29,10 +41,36 @@ export default {
       this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     }
   },
-
   created () {
+    this.changeTabBarActive()
+  },
+  updated(){
+    this.changeTabBarActive()
   },
   methods: {
+    changeTabBarActive () {
+      this.nowPath = this.$route.path
+      if (this.nowPath=='/Cart'){
+        this.active=2
+     }
+  },
+  changeTabbar(active) {
+    console.log(active)
+    switch(active){
+      case 0:
+        this.$router.push({name:'Home'})
+        break
+      case 1:
+        this.$router.push({name:'CategoryList'})
+        break
+      case 2:
+        this.$router.push({name:'Cart'})
+        break
+      case 3:
+        this.$router.push({name:'Member'})
+        break
+      }
+    }
   }
 }
 </script>
