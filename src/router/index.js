@@ -10,6 +10,7 @@ import Register from '@/pages/register' // 注册
 import Goods from '@/pages/goods' // 商品详情页
 import CategoryList from '@/pages/categoryList' // 商品类别
 import Cart from '@/pages/cart' // 商品类别
+import Member from '@/pages/member' // 商品类别
 
 Vue.use(Router)
 
@@ -68,6 +69,14 @@ export default new Router({
           name: 'Cart',
           meta: {
             title: '商品详情'
+          }
+        },
+        {
+          path: '/Member',
+          component: Member,
+          name: 'Member',
+          meta: {
+            title: '个人中心'
           }
         }
       ]
