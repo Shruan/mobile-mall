@@ -17,15 +17,14 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  components: {
-  },
+  components: {},
   name: 'Layout',
   data () {
     return {
       user: {},
       pageStyle: '',
       active: 0,
-      nowPath:'',  //当前路径
+      nowPath: '', // 当前路径
       transitionName: 'slide-left'
     }
   },
@@ -44,31 +43,30 @@ export default {
   created () {
     this.changeTabBarActive()
   },
-  updated(){
+  updated () {
     this.changeTabBarActive()
   },
   methods: {
     changeTabBarActive () {
       this.nowPath = this.$route.path
-      if (this.nowPath=='/Cart'){
-        this.active=2
-     }
-  },
-  changeTabbar(active) {
-    console.log(active)
-    switch(active){
-      case 0:
-        this.$router.push({name:'Home'})
-        break
-      case 1:
-        this.$router.push({name:'CategoryList'})
-        break
-      case 2:
-        this.$router.push({name:'Cart'})
-        break
-      case 3:
-        this.$router.push({name:'Member'})
-        break
+      if (this.nowPath == '/Cart') {
+        this.active = 2
+      }
+    },
+    changeTabbar (active) {
+      switch (active) {
+        case 0:
+          this.$router.push({name: 'Home'})
+          break
+        case 1:
+          this.$router.push({name: 'CategoryList'})
+          break
+        case 2:
+          this.$router.push({name: 'Cart'})
+          break
+        case 3:
+          this.$router.push({name: 'Member'})
+          break
       }
     }
   }
