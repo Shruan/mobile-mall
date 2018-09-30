@@ -3,8 +3,9 @@ const LOCALURL = 'http://localhost:3000'
 const URL = {
   getShoppingMallInfo: BASEURL + '/api/index',
   getGoodsInfo: BASEURL + 'getGoodsInfo',
-  registerUser: LOCALURL + '/api/register',
-  login: LOCALURL + '/api/login'
+  registerUser: LOCALURL + '/api/register', // 注册
+  login: LOCALURL + '/api/login', // 登录
+  getDetailGoodsInfo: LOCALURL + '/api/getDetailGoodsInfo' // 获取商品详情
 }
 
 module.exports = URL
